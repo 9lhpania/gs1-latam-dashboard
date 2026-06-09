@@ -524,14 +524,15 @@ function renderEjeCards(){
   var html="";
   for(var i=0;i<ejes.length;i++){
     var e    = ejes[i];
-    var kpis = KPIS.filter(function(d){ return d.eje===e.ejeName; });
-    var act  = kpis.filter(function(d){ return d.estadoMeta!=="Por Definir" && d.estadoMeta!=="Sin Iniciar"; });
-    var pct  = act.length ? Math.round(act.reduce(function(s,d){ return s+d.pct; },0)/act.length) : 0;
-    var isDef= act.length===0;
-    var color= isDef ? "#8B5CF6" : pct>=80 ? "#16A34A" : pct>=40 ? "#D97706" : "#DC2626";
-    var lider= kpis.length ? kpis[0].lider : "";
-    var stL  = isDef ? "Por definir" : pct>=80 ? "En Meta" : pct>=40 ? "En Progreso" : "Rezagado";
-    var stB  = isDef ? "badge-def"   : pct>=80 ? "badge-good" : pct>=40 ? "badge-warn" : "badge-bad";
+    var kpis      = KPIS.filter(function(d){ return d.eje===e.ejeName; });
+    var conMeta   = kpis.filter(function(d){ return d.estadoMeta!=="Por Definir" && d.meta>0; });
+    var sinInic   = conMeta.length>0 && conMeta.every(function(d){ return d.estadoMeta==="Sin Iniciar"; });
+    var pct       = conMeta.length ? Math.round(conMeta.reduce(function(s,d){ return s+d.pct; },0)/conMeta.length) : 0;
+    var isDef     = conMeta.length===0;
+    var color     = isDef ? "#8B5CF6" : sinInic ? "#94A3B8" : pct>=80 ? "#16A34A" : "#D97706";
+    var lider     = kpis.length ? kpis[0].lider : "";
+    var stL       = isDef ? "Por definir" : sinInic ? "Sin Iniciar" : pct>=80 ? "En Meta" : "En Progreso";
+    var stB       = isDef ? "badge-def" : sinInic ? "badge-neutral" : pct>=80 ? "badge-good" : "badge-warn";
     var pW   = Math.min(pct,100);
     html += '<div style="background:#fff;border-radius:14px;padding:20px 18px;box-shadow:0 3px 16px rgba(0,48,135,.07);border-left:4px solid '+color+';display:flex;flex-direction:column;gap:10px">';
     html += '<div style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-size:24px">'+e.icon+'</span><span class="badge '+stB+'" style="font-size:10px">'+stL+'</span></div>';
@@ -539,7 +540,8 @@ function renderEjeCards(){
     html += '<div style="font-size:11px;color:var(--muted)">'+lider+'</div>';
     html += '<div style="font-size:30px;font-weight:900;color:'+color+';line-height:1">'+(isDef ? "—" : pct+"%")+'</div>';
     html += '<div style="height:6px;background:var(--border);border-radius:99px;overflow:hidden"><div style="height:100%;width:'+pW+'%;background:'+color+';border-radius:99px"></div></div>';
-    html += '<div style="font-size:10px;color:var(--muted)">'+act.length+' KPI'+(act.length!==1?"s":"")+" activos de "+kpis.length+"</div>";
+    var actLen = kpis.filter(function(d){ return d.estadoMeta!=="Por Definir"&&d.estadoMeta!=="Sin Iniciar"; }).length;
+    html += '<div style="font-size:10px;color:var(--muted)">'+actLen+' KPI'+(actLen!==1?"s":"")+" activos de "+kpis.length+"</div>";
     html += '</div>';
   }
   document.getElementById("g-eje-cards").innerHTML = html;
