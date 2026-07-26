@@ -287,6 +287,9 @@ footer.foot a{color:var(--orange);text-decoration:none;}
   </div>
   <div class="content">
     <div class="kpi-grid" id="r-kpis"></div>
+    <p style="font-size:11px;color:var(--muted);margin:-8px 0 16px">
+      ℹ️ Las tarjetas muestran el acumulado total (suma de todos los períodos reportados) frente a la meta. Las gráficas muestran el dato real reportado en cada mes.
+    </p>
     <div id="r-kpi-charts"></div>
   </div>
 </div>
@@ -302,6 +305,9 @@ footer.foot a{color:var(--orange);text-decoration:none;}
   </div>
   <div class="content">
     <div class="kpi-grid" id="m-kpis"></div>
+    <p style="font-size:11px;color:var(--muted);margin:-8px 0 16px">
+      ℹ️ Las tarjetas muestran el acumulado total reportado frente a la meta. La gráfica y la tabla de abajo reflejan el estado real de participación reportado cada año.
+    </p>
 
     <div class="chart-card chart-full" style="margin-bottom:var(--gap)">
       <h3>📊 Participación de MOs por año (2023–2026)</h3>
@@ -335,7 +341,7 @@ footer.foot a{color:var(--orange);text-decoration:none;}
   <div class="page-header">
     <div>
       <h1>🏆 Casos de Éxito</h1>
-      <p>Líder: Angie Avila 🇨🇴</p>
+      <p>Líder: Carlos Coutinho 🇧🇷</p>
     </div>
     <div><span class="hdr-badge" style="background:#F1F5F9;color:#475569">Sin Iniciar</span></div>
   </div>
@@ -359,13 +365,13 @@ footer.foot a{color:var(--orange);text-decoration:none;}
       <h1>🤝 GRP – Iniciativas GO</h1>
       <p>Líder: Marina Pereira 🇧🇷</p>
     </div>
-    <div><span class="hdr-badge" style="background:#EDE9FE;color:#5B21B6">Por Definir</span></div>
+    <div><span class="hdr-badge" style="background:#F1F5F9;color:#475569">Sin Iniciar</span></div>
   </div>
   <div class="content">
     <div class="kpi-grid" id="grp-kpis"></div>
-    <div class="chart-card chart-full">
-      <h3>📌 Estado del eje</h3>
-      <p style="font-size:13px;color:var(--muted);padding:24px 0;text-align:center;">⚙️ Los indicadores de este eje están <strong>Por Definir</strong>. Una vez establecidos aparecerán aquí automáticamente.</p>
+    <div class="progress-card">
+      <h3>📈 Detalle</h3>
+      <div id="grp-progress"></div>
     </div>
   </div>
 </div>
@@ -377,13 +383,13 @@ footer.foot a{color:var(--orange);text-decoration:none;}
       <h1>🛒 Marketplaces</h1>
       <p>Líder: Claudia Geniz 🇦🇷</p>
     </div>
-    <div><span class="hdr-badge" style="background:#EDE9FE;color:#5B21B6">Por Definir</span></div>
+    <div><span class="hdr-badge" style="background:#F1F5F9;color:#475569">Sin Iniciar</span></div>
   </div>
   <div class="content">
     <div class="kpi-grid" id="mkt-kpis"></div>
-    <div class="chart-card chart-full">
-      <h3>📌 Estado del eje</h3>
-      <p style="font-size:13px;color:var(--muted);padding:24px 0;text-align:center;">⚙️ Los indicadores de este eje están <strong>Por Definir</strong>. Una vez establecidos aparecerán aquí automáticamente.</p>
+    <div class="progress-card">
+      <h3>📈 Detalle</h3>
+      <div id="mkt-progress"></div>
     </div>
   </div>
 </div>
@@ -395,25 +401,32 @@ footer.foot a{color:var(--orange);text-decoration:none;}
 // DATA
 // ══════════════════════════════════════════════════════════════
 const KPIS = [
-  { eje:"2D Resolver",       lider:"Oscar 🇲🇽",          kpi:"MOs utilizan la Herramienta Latam o propia", meta:15,   logro:4,    estadoMeta:"En proceso",  fecha:"2026-05-31" },
-  { eje:"2D Resolver",       lider:"Oscar 🇲🇽",          kpi:"Fabricantes usando QR GS1",                  meta:2000, logro:1066, estadoMeta:"En proceso",  fecha:"2026-05-31" },
-  { eje:"2D Resolver",       lider:"Oscar 🇲🇽",          kpi:"Minoristas con QR GS1 en PDV",               meta:10,   logro:1,    estadoMeta:"En proceso",  fecha:"2026-05-31" },
-  { eje:"Nivel Madurez 2D",  lider:"Monalisa 🇧🇷",       kpi:"MOs participantes en encuesta",              meta:12,   logro:10,   estadoMeta:"En proceso",  fecha:"2026-05-31" },
-  { eje:"Nivel Madurez 2D",  lider:"Monalisa 🇧🇷",       kpi:"Minoristas encuestados",                     meta:130,  logro:0,    estadoMeta:"Sin Iniciar", fecha:null },
-  { eje:"Nivel Madurez 2D",  lider:"Monalisa 🇧🇷",       kpi:"Fabricantes encuestados",                    meta:500,  logro:0,    estadoMeta:"Sin Iniciar", fecha:null },
-  { eje:"Nivel Madurez 2D",  lider:"Monalisa 🇧🇷",       kpi:"Margen de error logrado (<=5%)",             meta:5,    logro:0,    estadoMeta:"Sin Iniciar", fecha:null },
-  { eje:"Casos de Exito",    lider:"Angie Avila 🇨🇴",    kpi:"Casos de exito documentados",                meta:3,    logro:0,    estadoMeta:"Sin Iniciar", fecha:null },
-  { eje:"GRP",               lider:"Marina Pereira 🇧🇷", kpi:"Nivel de adhesion MOs a Iniciativas GO",     meta:0,    logro:0,    estadoMeta:"Por Definir", fecha:null },
-  { eje:"Marketplaces",      lider:"Claudia Geniz 🇦🇷",  kpi:"Nivel de Calidad de Datos",                  meta:0,    logro:0,    estadoMeta:"Por Definir", fecha:null },
+  { eje:"2D Resolver",       lider:"Oscar 🇲🇽",          kpi:"MOs utilizan la Herramienta Latam o propia", meta:15,   logro:8,    estadoMeta:"En proceso",  fecha:"2026-06-30" },
+  { eje:"2D Resolver",       lider:"Oscar 🇲🇽",          kpi:"Fabricantes usando QR GS1",                  meta:2000, logro:1345, estadoMeta:"En proceso",  fecha:"2026-06-30" },
+  { eje:"2D Resolver",       lider:"Oscar 🇲🇽",          kpi:"Minoristas con QR GS1 en PDV",               meta:10,   logro:1,    estadoMeta:"En proceso",  fecha:"2026-06-30" },
+  { eje:"Nivel Madurez 2D",  lider:"Monalisa 🇧🇷",       kpi:"MOs participantes en encuesta",              meta:12,   logro:10,   estadoMeta:"En proceso",  fecha:"2026-06-30" },
+  { eje:"Nivel Madurez 2D",  lider:"Monalisa 🇧🇷",       kpi:"Minoristas encuestados",                     meta:130,  logro:0,    estadoMeta:"En proceso", fecha:null },
+  { eje:"Nivel Madurez 2D",  lider:"Monalisa 🇧🇷",       kpi:"Fabricantes encuestados",                    meta:500,  logro:0,    estadoMeta:"En proceso", fecha:null },
+  { eje:"Nivel Madurez 2D",  lider:"Monalisa 🇧🇷",       kpi:"Margen de error logrado (<=5%)",             meta:5,    logro:0,    estadoMeta:"En proceso", fecha:null },
+  { eje:"Casos de Exito",    lider:"Carlos Coutinho 🇧🇷", kpi:"Casos de exito documentados",                meta:3,    logro:0,    estadoMeta:"Sin Iniciar", fecha:null },
+  { eje:"GRP",               lider:"Marina Pereira 🇧🇷", kpi:"Nivel de adhesion MOs a Iniciativas GO",     meta:100,  logro:0,    estadoMeta:"Sin Iniciar", fecha:null },
+  { eje:"Marketplaces",      lider:"Claudia Geniz 🇦🇷",  kpi:"MOs que trabajan con plataformas ecommerce", meta:50,   logro:0,    estadoMeta:"Sin Iniciar", fecha:null },
 ].map(function(d){ return Object.assign({}, d, { pct: d.meta > 0 ? Math.round((d.logro/d.meta)*100) : 0 }); });
 
+// Nota metodológica: RESOLVER_HIST guarda el DATO REAL reportado cada mes (tal cual
+// aparece en el Excel), para que la gráfica no induzca a error. El acumulado que se
+// compara contra la meta (dic-2025 + may-2026 + jun-2026 en adelante) se calcula
+// aparte y se muestra únicamente en la tarjeta de KPI (KPIS.logro).
 const RESOLVER_HIST = [
   { kpi:"MOs utilizan la Herramienta Latam o propia", logro:2,    fecha:"2025-12-31" },
-  { kpi:"MOs utilizan la Herramienta Latam o propia", logro:4,    fecha:"2026-05-31" },
+  { kpi:"MOs utilizan la Herramienta Latam o propia", logro:2,    fecha:"2026-05-31" },
+  { kpi:"MOs utilizan la Herramienta Latam o propia", logro:4,    fecha:"2026-06-30" },
   { kpi:"Fabricantes usando QR GS1",                  logro:49,   fecha:"2025-12-31" },
-  { kpi:"Fabricantes usando QR GS1",                  logro:1066, fecha:"2026-05-31" },
+  { kpi:"Fabricantes usando QR GS1",                  logro:1017, fecha:"2026-05-31" },
+  { kpi:"Fabricantes usando QR GS1",                  logro:279,  fecha:"2026-06-30" },
   { kpi:"Minoristas con QR GS1 en PDV",               logro:0,    fecha:"2025-12-31" },
   { kpi:"Minoristas con QR GS1 en PDV",               logro:1,    fecha:"2026-05-31" },
+  { kpi:"Minoristas con QR GS1 en PDV",               logro:0,    fecha:"2026-06-30" },
 ];
 
 const MO_DATA = [
@@ -440,6 +453,7 @@ const MO_DATA = [
 
 const SESIONES = [
   { fecha:"2026-06-03", duracionTotal:"1:43:16", duracionProm:"1:18:25", participantes:33 },
+  { fecha:"2026-07-08", duracionTotal:"1:04:29", duracionProm:"0:52:15", participantes:25 },
 ];
 
 const EQUIPO = [
@@ -447,7 +461,7 @@ const EQUIPO = [
   { rol:"Sub Lider Comite",         nombre:"Marina Pereira",    pais:"Brasil",     iso:"br" },
   { rol:"Sub Lider Comite",         nombre:"Claudia Geniz",     pais:"Argentina",  iso:"ar" },
   { rol:"2D Resolver",              nombre:"Oscar Cruz",        pais:"Mexico",     iso:"mx" },
-  { rol:"Casos de Exito",           nombre:"Angie Avila",       pais:"Colombia",   iso:"co" },
+  { rol:"Casos de Exito",           nombre:"Carlos Coutinho",   pais:"Brasil",     iso:"br" },
   { rol:"Nivel de Madurez 2D",      nombre:"Monalisa Ferreira", pais:"Brasil",     iso:"br" },
   { rol:"GRP",                      nombre:"Marina Pereira",    pais:"Brasil",     iso:"br" },
   { rol:"Marketplaces",             nombre:"Claudia Geniz",     pais:"Argentina",  iso:"ar" },
@@ -457,11 +471,11 @@ const EQUIPO = [
 function stInfo(d){
   if(d.estadoMeta==="Por Definir") return { label:"Por Definir",  badge:"badge-def",     barColor:"#8B5CF6", pctCls:"",        cardCls:"" };
   if(d.estadoMeta==="Sin Iniciar") return { label:"Sin Iniciar",  badge:"badge-neutral", barColor:"#94A3B8", pctCls:"neutral", cardCls:"neutral" };
-  if(d.pct>=80) return { label:"En Meta",      badge:"badge-good",    barColor:"#16A34A", pctCls:"good", cardCls:"good" };
-  if(d.pct>=40) return { label:"En Progreso",  badge:"badge-warn",    barColor:"#D97706", pctCls:"warn", cardCls:"warn" };
-  return           { label:"Rezagado",         badge:"badge-bad",     barColor:"#DC2626", pctCls:"bad",  cardCls:"bad"  };
+  if(d.pct>=95) return { label:"En Meta",      badge:"badge-good",    barColor:"#16A34A", pctCls:"good", cardCls:"good" };
+  if(d.pct>=85) return { label:"Atención",     badge:"badge-warn",    barColor:"#D97706", pctCls:"warn", cardCls:"warn" };
+  return           { label:"En Riesgo",        badge:"badge-bad",     barColor:"#DC2626", pctCls:"bad",  cardCls:"bad"  };
 }
-function fmt(n){ return n>=1e6?(n/1e6).toFixed(1)+"M":n>=1e3?(n/1e3).toFixed(1)+"K":Number(n).toLocaleString("es-MX"); }
+function fmt(n){ return Number(n).toLocaleString("es-MX"); }
 function fmtDate(s){ if(!s) return "—"; var p=s.split("-"); return new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString("es-MX",{year:"numeric",month:"short",day:"2-digit"}); }
 function toSeconds(t){ var p=t.split(":").map(Number); return p[0]*3600+p[1]*60+(p[2]||0); }
 
@@ -529,10 +543,10 @@ function renderEjeCards(){
     var sinInic   = conMeta.length>0 && conMeta.every(function(d){ return d.estadoMeta==="Sin Iniciar"; });
     var pct       = conMeta.length ? Math.round(conMeta.reduce(function(s,d){ return s+d.pct; },0)/conMeta.length) : 0;
     var isDef     = conMeta.length===0;
-    var color     = isDef ? "#8B5CF6" : sinInic ? "#94A3B8" : pct>=80 ? "#16A34A" : "#D97706";
+    var color     = isDef ? "#8B5CF6" : sinInic ? "#94A3B8" : pct>=95 ? "#16A34A" : pct>=85 ? "#D97706" : "#DC2626";
     var lider     = kpis.length ? kpis[0].lider : "";
-    var stL       = isDef ? "Por definir" : sinInic ? "Sin Iniciar" : pct>=80 ? "En Meta" : "En Progreso";
-    var stB       = isDef ? "badge-def" : sinInic ? "badge-neutral" : pct>=80 ? "badge-good" : "badge-warn";
+    var stL       = isDef ? "Por definir" : sinInic ? "Sin Iniciar" : pct>=95 ? "En Meta" : pct>=85 ? "Atención" : "En Riesgo";
+    var stB       = isDef ? "badge-def" : sinInic ? "badge-neutral" : pct>=95 ? "badge-good" : pct>=85 ? "badge-warn" : "badge-bad";
     var pW   = Math.min(pct,100);
     html += '<div style="background:#fff;border-radius:14px;padding:20px 18px;box-shadow:0 3px 16px rgba(0,48,135,.07);border-left:4px solid '+color+';display:flex;flex-direction:column;gap:10px">';
     html += '<div style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-size:24px">'+e.icon+'</span><span class="badge '+stB+'" style="font-size:10px">'+stL+'</span></div>';
@@ -606,7 +620,7 @@ function buildResolver(){
   var TIMELINE = [
     { label:"Dic 2025", fecha:"2025-12-31" },
     { label:"May 2026", fecha:"2026-05-31" },
-    { label:"Jun 2026", fecha:null },
+    { label:"Jun 2026", fecha:"2026-06-30" },
     { label:"Jul 2026", fecha:null },
     { label:"Ago 2026", fecha:null },
     { label:"Sep 2026", fecha:null },
@@ -616,8 +630,6 @@ function buildResolver(){
   ];
 
   var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  var pendColor  = isDark ? '#3C3C3C' : '#F1F5F9';
-  var pendBorder = isDark ? '#444'    : '#D3D1C7';
 
   var chartsHtml = '';
   kpis.forEach(function(kpi, ki){
@@ -651,10 +663,6 @@ function buildResolver(){
       +'<div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap">'
       +'<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted,#6B7394)">'
       +'<span style="width:10px;height:10px;border-radius:2px;background:'+color+';flex-shrink:0"></span>Logro real</div>'
-      +'<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted,#6B7394)">'
-      +'<span style="width:10px;height:10px;border-radius:2px;background:'+pendColor+';border:0.5px solid '+pendBorder+';flex-shrink:0"></span>Pendiente</div>'
-      +'<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted,#6B7394)">'
-      +'<span style="width:18px;height:0;border-top:2px dashed #B4B2A9;flex-shrink:0"></span>Meta</div>'
       +'</div>'
       +'</div>';
   });
@@ -672,10 +680,7 @@ function buildResolver(){
       var h = RESOLVER_HIST.find(function(r){ return r.kpi===kpi.kpi && r.fecha===t.fecha; });
       return h ? h.logro : null;
     });
-    var pendData = TIMELINE.map(function(t){
-      return t.fecha ? null : kpi.meta;
-    });
-    var metaData = TIMELINE.map(function(){ return kpi.meta; });
+    var maxLogro = Math.max.apply(null, [0].concat(barData.map(function(v){ return v||0; })));
 
     mkChart(chartId, {
       data: {
@@ -690,28 +695,6 @@ function buildResolver(){
             borderSkipped: 'bottom',
             borderWidth: 0,
             order: 2,
-          },
-          {
-            type: 'bar',
-            label: 'Pendiente',
-            data: pendData,
-            backgroundColor: pendColor,
-            borderColor: pendBorder,
-            borderWidth: 0.5,
-            borderRadius: { topLeft:5, topRight:5, bottomLeft:0, bottomRight:0 },
-            borderSkipped: 'bottom',
-            order: 3,
-          },
-          {
-            type: 'line',
-            label: 'Meta',
-            data: metaData,
-            borderColor: '#888780',
-            borderWidth: 1.5,
-            borderDash: [5,4],
-            pointRadius: 0,
-            fill: false,
-            order: 1,
           }
         ]
       },
@@ -723,8 +706,6 @@ function buildResolver(){
           tooltip: {
             callbacks: {
               label: function(ctx){
-                if(ctx.dataset.label==='Meta')     return 'Meta: '+fmt(kpi.meta);
-                if(ctx.dataset.label==='Pendiente') return 'Pendiente';
                 return ctx.raw !== null ? 'Logro: '+fmt(ctx.raw) : '';
               }
             }
@@ -737,7 +718,7 @@ function buildResolver(){
           },
           y: {
             beginAtZero: true,
-            max: Math.ceil(kpi.meta * 1.18),
+            max: Math.ceil(Math.max(maxLogro,1) * 1.2),
             ticks: { font:{size:10}, color:'#888780' },
             grid: { color: isDark ? 'rgba(255,255,255,0.06)' : '#F1EFE8', lineWidth:0.5 },
           }
@@ -864,16 +845,22 @@ function buildCasos(){
 function buildGRP(){
   var d=KPIS.find(function(k){ return k.eje==="GRP"; });
   document.getElementById("grp-kpis").innerHTML=
-    '<div class="kpi-card" style="border-bottom-color:#8B5CF6"><div class="kpi-label">KPI</div><div class="kpi-val" style="font-size:14px;color:#8B5CF6">'+d.kpi+'</div></div>'
-   +'<div class="kpi-card" style="border-bottom-color:#8B5CF6"><div class="kpi-label">Estado</div><div class="kpi-val" style="color:#8B5CF6">Por Definir</div><div class="kpi-sub">Meta por establecer</div></div>';
+    '<div class="kpi-card neutral"><div class="kpi-label">KPI</div><div class="kpi-val neutral" style="font-size:15px">'+d.kpi+'</div></div>'
+   +'<div class="kpi-card neutral"><div class="kpi-label">Meta</div><div class="kpi-val neutral">'+fmt(d.meta)+'%</div><div class="kpi-sub">adhesión de MOs</div></div>'
+   +'<div class="kpi-card neutral"><div class="kpi-label">Logro actual</div><div class="kpi-val neutral">'+fmt(d.logro)+'%</div></div>'
+   +'<div class="kpi-card neutral"><div class="kpi-label">Estado</div><div class="kpi-val neutral">0%</div><div class="kpi-sub">Sin Iniciar</div></div>';
+  document.getElementById("grp-progress").innerHTML='<div class="prog-item"><div class="prog-ldr">'+d.lider+'</div><div class="prog-top"><span class="prog-kpi">'+d.kpi+'</span><span class="prog-vals">'+fmt(d.logro)+'% / '+fmt(d.meta)+'%</span></div><div class="bar-track"><div class="bar-fill" style="width:0%;background:#94A3B8"></div></div></div>';
 }
 
 // ══ MARKETPLACES ═════════════════════════════════════════════
 function buildMarket(){
   var d=KPIS.find(function(k){ return k.eje==="Marketplaces"; });
   document.getElementById("mkt-kpis").innerHTML=
-    '<div class="kpi-card" style="border-bottom-color:#8B5CF6"><div class="kpi-label">KPI</div><div class="kpi-val" style="font-size:14px;color:#8B5CF6">'+d.kpi+'</div></div>'
-   +'<div class="kpi-card" style="border-bottom-color:#8B5CF6"><div class="kpi-label">Estado</div><div class="kpi-val" style="color:#8B5CF6">Por Definir</div><div class="kpi-sub">Meta por establecer</div></div>';
+    '<div class="kpi-card neutral"><div class="kpi-label">KPI</div><div class="kpi-val neutral" style="font-size:15px">'+d.kpi+'</div></div>'
+   +'<div class="kpi-card neutral"><div class="kpi-label">Meta</div><div class="kpi-val neutral">'+fmt(d.meta)+'%</div><div class="kpi-sub">MOs con ecommerce</div></div>'
+   +'<div class="kpi-card neutral"><div class="kpi-label">Logro actual</div><div class="kpi-val neutral">'+fmt(d.logro)+'%</div></div>'
+   +'<div class="kpi-card neutral"><div class="kpi-label">Estado</div><div class="kpi-val neutral">0%</div><div class="kpi-sub">Sin Iniciar</div></div>';
+  document.getElementById("mkt-progress").innerHTML='<div class="prog-item"><div class="prog-ldr">'+d.lider+'</div><div class="prog-top"><span class="prog-kpi">'+d.kpi+'</span><span class="prog-vals">'+fmt(d.logro)+'% / '+fmt(d.meta)+'%</span></div><div class="bar-track"><div class="bar-fill" style="width:0%;background:#94A3B8"></div></div></div>';
 }
 
 // ══ NAVEGACION ════════════════════════════════════════════════
